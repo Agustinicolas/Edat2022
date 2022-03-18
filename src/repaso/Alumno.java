@@ -12,19 +12,15 @@ public class Alumno {
     private String domicilioCalle = "";
     private int domicilioNum;
     private String domicilioCiudad = "";
-    private long telefono;
+    private int telefono;
     private String usuarioSiu = "";
     private String claveSiu = "";
 
 
     //métodos constructores
 
-    public Alumno(String legajo, String tipoDni, int numDni){
+    public Alumno(String legajo){
         this.legajo = legajo;
-        this.tipoDni = tipoDni;
-        this.numDni = numDni;
-        this.usuarioSiu = Integer.toString(numDni);
-        this.claveSiu = Integer.toString(numDni);
     }
 
     public Alumno(String legajo, String nombre, String apellido, String tipoDni, int numDni){
@@ -74,7 +70,7 @@ public class Alumno {
         return this.domicilioCiudad;
     }
 
-    public long getTelefono(){
+    public int getTelefono(){
         return this.telefono;
     }
 
@@ -90,7 +86,7 @@ public class Alumno {
         cadena = cadena + "tipo DNI: " + this.tipoDni + "\n";
         cadena = cadena + "número DNI: " + Integer.toString(this.numDni) + "\n";
         cadena = cadena + "Domicilio: " + this.domicilioCalle + " " + Integer.toString(this.domicilioNum) + ", " +this.domicilioCiudad + "\n";
-        cadena = cadena + "telefono: " + Long.toString(this.telefono) + "\n";
+        cadena = cadena + "telefono: " + Integer.toString(this.telefono) + "\n";
         cadena = cadena + "Usuario SIU: " + this.usuarioSiu + "\n\n";
 
         return cadena;
@@ -127,8 +123,12 @@ public class Alumno {
         this.domicilioCiudad = domicilioCiudad;
     }
 
-    public void setTelefono(long telefono){
+    public void setTelefono(int telefono){
         this.telefono = telefono;
+    }
+
+    public void setUsuarioSiu(String usuarioSiu){
+        this.usuarioSiu = usuarioSiu;
     }
 
     public void setClaveSiu(String clave){
