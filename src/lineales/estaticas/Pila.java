@@ -87,7 +87,7 @@ public class Pila {
         String cadena =" ";
         int n = this.tope;
         int i;
-        
+
         if (n == -1){ //caso de pila vacía
             cadena = "Pila vacía";
         }else{ // caso de pila no vacía
