@@ -4,8 +4,8 @@ public class testAlumno {
     
     public static void main(String[] args){
 
-        Alumno a = new Alumno("FAI-222", "DNI", 25986544);
-        Alumno b = new Alumno("FAI-3434", "DNI", 43989898);
+        Alumno a = new Alumno("FAI-222");
+        Alumno b = new Alumno("FAI-3434");
 
         System.out.println("ALUMNO A");
         System.out.println(a.aCadena());

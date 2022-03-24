@@ -19,12 +19,8 @@ public class Alumno {
 
     //métodos constructores
 
-    public Alumno(String legajo, String tipoDni, int numDni){
+    public Alumno(String legajo){
         this.legajo = legajo;
-        this.tipoDni = tipoDni;
-        this.numDni = numDni;
-        this.usuarioSiu = Integer.toString(numDni);
-        this.claveSiu = Integer.toString(numDni);
     }
 
     public Alumno(String legajo, String nombre, String apellido, String tipoDni, int numDni){
@@ -34,8 +30,6 @@ public class Alumno {
         this.apellido = apellido;
         this.tipoDni = tipoDni;
         this.numDni = numDni;
-        this.usuarioSiu = Integer.toString(numDni);
-        this.claveSiu = Integer.toString(numDni);
 
     }
 
