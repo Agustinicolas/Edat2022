@@ -43,9 +43,82 @@ public class TestPila {
         System.out.println("PILA 2:" + pila2.toString());
         System.out.println("\n VACIO PILA1:");
         pila1.vaciar();
-        exito = pila1.esVacía();
+        exito = pila1.esVacia();
         System.out.println("vaciado: " + exito);
         System.out.println("PILA 1:" + pila1.toString());
         System.out.println("PILA 2:" + pila2.toString());
+
+        System.out.println("\nEJERCICIO 3:");
+        Pila pila3 = new Pila();
+        pila3.apilar(1);
+        pila3.apilar(0);
+        pila3.apilar(2);
+        pila3.apilar(3);
+        pila3.apilar(3);
+        pila3.apilar(2);
+        pila3.apilar(0);
+        pila3.apilar(1);
+        Pila pila4 = new Pila();
+        pila4.apilar(1);
+        pila4.apilar(0);
+        pila4.apilar(2);
+        pila4.apilar(4);
+        pila4.apilar(0);
+        pila4.apilar(2);
+        pila4.apilar(0);
+        pila4.apilar(1);
+        Pila pila5 = new Pila();
+        pila5.apilar(4);
+        pila5.apilar(0);
+        pila5.apilar(3);
+        pila5.apilar(2);
+        pila5.apilar(3);
+        pila5.apilar(0);
+        pila5.apilar(4);
+        Pila pila6 = new Pila();
+        pila6.apilar(4);
+        pila6.apilar(0);
+        pila6.apilar(2);
+        pila6.apilar(2);
+        pila6.apilar(3);
+        pila6.apilar(0);
+        pila6.apilar(4);
+        exito = esCapicua(pila3);
+        System.out.println(pila3.toString()+ "|  capicua: " + exito);
+        exito = esCapicua(pila4);
+        System.out.println(pila4.toString()+ "|  capicua: " + exito);
+        exito = esCapicua(pila5);
+        System.out.println(pila5.toString()+ "|  capicua: " + exito);
+        exito = esCapicua(pila6);
+        System.out.println(pila6.toString()+ "|  capicua: " + exito);
+        
+        
+
+
+
+        
+    }
+
+    //EJERCICIO 3
+
+    public static boolean esCapicua(Pila pilaOrig){
+        //Retorna true si la pila es capicua, caso contrario retorna false
+        boolean capicua = true;
+        Pila pilaClon = new Pila();
+        pilaClon = pilaOrig.clone();
+        Pila pilaAux = new Pila();
+        while ( !pilaClon.esVacia() ){
+            pilaAux.apilar(pilaClon.obtenerTope());
+            pilaClon.desapilar();
+        }
+        pilaClon = pilaOrig.clone();
+        while ( !(pilaClon.esVacia()) && capicua == true){
+            if(! pilaClon.obtenerTope().equals(pilaAux.obtenerTope())){
+                capicua = false;
+            }
+            pilaClon.desapilar();
+            pilaAux.desapilar();
+        }
+        return capicua;
     }
 }

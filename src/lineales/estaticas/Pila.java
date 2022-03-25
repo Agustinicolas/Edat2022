@@ -53,7 +53,7 @@ public class Pila {
         return elemento;
     }
 
-    public boolean esVacía(){
+    public boolean esVacia(){
         //Devuelve true si la pila es vacía, caso contrario devuelve false
         boolean vacia = false;
 
@@ -92,7 +92,7 @@ public class Pila {
             cadena = "Pila vacía";
         }else{ // caso de pila no vacía
             for (i = 0; i <= n; i++){
-                cadena = cadena + (String)arreglo[i] + " | ";
+                cadena = cadena + arreglo[i].toString() + " | ";
             }
             cadena = cadena + "<- tope";
         }
