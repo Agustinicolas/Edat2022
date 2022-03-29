@@ -51,20 +51,27 @@ public class Pila {
     }
 
     public Pila clone(){
+        
         Pila pilaClon = new Pila();
-		Nodo aux1 = new Nodo(this.tope.getElem(), this.tope.getEnlace()); //primer nodo auxiliar, recorre pila original
-		Nodo topeCopia = new Nodo(aux1.getElem(),aux1.getEnlace()); //nodo tope de pila clon, clona elementos de aux1 (tope pila original)
-		pilaClon.tope = topeCopia; //setea el tope de pila clon
-		Nodo aux2 = topeCopia; //segundo nodo auxiliar, recorre pila clon
-		
-		while (aux1 != null) {
-			aux1 = aux1.getEnlace(); //"corrimiento" del aux1 sobre la pila original
-			Nodo nuevo = aux1; //se crea nuevo nodo, apunta a aux1
-			aux2.setEnlace(nuevo); //nodo aux2 apunta a nodo nuevo
-			aux2 = aux2.getEnlace(); //"corrimiento" de aux2
-			
-		}
-		return pilaClon;
+        Nodo aux1;
+        Nodo aux2;
+        Nodo nodoClon;
+        
+		 if (!this.esVacia()){
+            nodoClon = new Nodo(this.tope.getElem(), null);
+            pilaClon.tope = nodoClon;
+            aux1 = this.tope.getEnlace();
+            aux2 = nodoClon;
+
+            while (aux1 != null){
+                
+                aux2.setEnlace(new Nodo(aux1.getElem(),null));
+                aux1 = aux1.getEnlace();
+                aux2 = aux2.getEnlace();
+            }
+         }
+
+         return pilaClon;
     }
 
     @Override
