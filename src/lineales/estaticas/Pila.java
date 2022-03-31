@@ -1,11 +1,18 @@
 package lineales.estaticas;
 
+/**
+ *
+ * @author Hernandez Agustin 
+ * FAI-505
+ *
+ */
+
 public class Pila {
     
     //ATRIBUTOS
     private Object[] arreglo;
     private int tope;
-    private static final int TAMANIO = 20;
+    private static final int TAMANIO = 10;
 
 
     //CONSTRUCTOR

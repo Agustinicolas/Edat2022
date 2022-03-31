@@ -1,5 +1,12 @@
 package lineales.dinamicas;
 
+/**
+ *
+ * @author Hernandez Agustin 
+ * FAI-505
+ *
+ */
+
 public class Pila {
     
     //ATRIBUTOS
@@ -32,8 +39,13 @@ public class Pila {
 
 
     public Object obtenerTope(){
-        return this.tope.getElem(); //Devuelve el Object del nodo tope
-
+        
+        Object obj = new Object();
+        obj = null;
+        if (!this.esVacia()){
+            obj = this.tope.getElem(); //Devuelve el Object del nodo tope
+        }
+        return obj;
     }
 
 
