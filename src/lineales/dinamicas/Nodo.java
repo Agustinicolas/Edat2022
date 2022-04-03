@@ -1,5 +1,12 @@
 package lineales.dinamicas;
 
+/**
+ *
+ * @author Hernandez Agustin 
+ * FAI-505
+ *
+ */
+
 public class Nodo {
     
     //ATRIBUTOS
