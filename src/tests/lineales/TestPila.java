@@ -1,5 +1,6 @@
-package lineales.dinamicas;
+package tests.lineales;
 import utiles.TecladoIn;
+import lineales.estaticas.Pila;
 
 public class TestPila {    
     public static void main (String[] args){

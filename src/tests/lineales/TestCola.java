@@ -1,4 +1,6 @@
-package lineales.estaticas;
+package tests.lineales;
+
+import lineales.dinamicas.Cola;
 
 public class TestCola {
     
@@ -87,7 +89,7 @@ public class TestCola {
         System.out.println("Exito: "+exito+" "+cola1.toString());
         exito = cola1.sacar();
         System.out.println("Exito: "+exito+" "+cola1.toString());
-        System.out.println("Cola1: "+cola1.toString());
+        System.out.println("\nCola1: "+cola1.toString());
         System.out.println("Cola2: "+cola2.toString());
 
     }
