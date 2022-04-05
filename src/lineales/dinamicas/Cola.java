@@ -22,12 +22,11 @@ public class Cola {
 
         nuevoNodo = new Nodo(elemento,null);
         if (this.esVacia()){ //Si la cola esta vacía, frente y fin apuntan al nuevo nodo creado
-            this.frente = nuevoNodo;
-            this.fin = nuevoNodo;
+            this.frente = nuevoNodo;            
         }else{ //Si la cola no esta vacia, se enlaza el fin de la cola al nodo creado y se setea como el nuevo final.
             this.fin.setEnlace(nuevoNodo);
-            this.fin = nuevoNodo;
-        }
+            }
+        this.fin = nuevoNodo;
 
         return exito;
     }
@@ -40,6 +39,8 @@ public class Cola {
             exito = false; //si la cola esta vacia, retorna falso
         else{ //si la cola no esta vacia, frente apunta al siguiente elemento de la cola
             this.frente = this.frente.getEnlace();
+            if (this.frente == null)//si la cola queda vacia luego de sacar, se "arregla" donde apunta fin
+                this.fin = null;
         }
 
         return exito;
@@ -88,10 +89,9 @@ public class Cola {
             while (aux1 != null){ //recorre del segundo al ultimo elemento de la cola
                 nodoAux.setEnlace(new Nodo(aux1.getElem(),null));
                 nodoAux = nodoAux.getEnlace();
-                colaClon.fin = nodoAux;
-                aux1 = aux1.getEnlace();                
-
+                aux1 = aux1.getEnlace();        
             }
+            colaClon.fin = nodoAux;
         }
 
         return colaClon;
