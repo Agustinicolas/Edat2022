@@ -1,5 +1,4 @@
 package tests.lineales;
-import utiles.TecladoIn;
 import lineales.estaticas.Pila;
 
 public class TestPila {    

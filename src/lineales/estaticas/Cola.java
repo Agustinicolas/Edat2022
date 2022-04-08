@@ -96,7 +96,7 @@ public class Cola {
         if (this.esVacia())
             cadena = "Cola vacía.";
         else{
-            while ( i < this.fin){
+            while ( i != this.fin){
                 cadena = cadena + this.arreglo[i].toString() + " | ";
                 i = (i + 1)%TAMANIO;
             }
