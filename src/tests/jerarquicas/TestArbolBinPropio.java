@@ -83,8 +83,8 @@ public class TestArbolBinPropio {
         System.out.println("METODO ESVACIO EN ARBOL VACIO, ESPERA TRUE --- "+arbol1.esVacio()); 
         System.out.println("METODO ALTURA EN ARBOL CLON, ESPERA 3 --- "+ arbol2.altura());
         System.out.println("METODO NIVEL EN ELEMENTO INEXISTENTE, ESPERA -1 --- " + arbol1.nivel("ASD"));
-        System.out.println("METODO NIVEL EN ELEMENTO 'G', ESPERA 3 --- " + arbol1.nivel('G'));
-        System.out.println("METODO PADRE EN ELEMENTO INEXISTENTE, ESPERA NULL/true --- " +(arbol2.padre('K'))==null);
+        System.out.println("METODO NIVEL EN ELEMENTO 'G', ESPERA 3 --- " + arbol2.nivel('G'));
+        System.out.println("METODO PADRE EN ELEMENTO INEXISTENTE, ESPERA NULL/true --- " +(arbol2.padre('K')==null));
         System.out.println("METODO PADRE EN ELEMENTO G, ESPERA F --- " +arbol2.padre('G'));
         
     }
