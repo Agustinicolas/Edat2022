@@ -80,9 +80,12 @@ public class ArbolBin {
 
     public Object padre(Object elemento){
         //Dado un elemento, devuelve el valor almacenado en su nodo padre (busca la primera aparicion del elemento)
-        NodoArbol padre = null;
-        Object elem = null;
-        if(!(this.esVacio() || elemento.equals(this.raiz.getElem()))){
+        NodoArbol padre = new NodoArbol(null, null, null);
+        Object elem = new Object();
+
+        if(elemento.equals(this.raiz.getElem()) || this.esVacio()){
+            elem = null;
+        }else{
             padre = padreAux(elemento, this.raiz);
         }
 
