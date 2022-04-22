@@ -1,3 +1,9 @@
+/*
+ *
+ * @author Hernandez Agustin 
+ * FAI-505
+ *
+ */
 package jerarquicas;
 
 public class NodoArbol {
