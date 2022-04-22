@@ -1,3 +1,9 @@
+/*
+ *
+ * @author Hernandez Agustin 
+ * FAI-505
+ *
+ */
 package jerarquicas;
 
 import lineales.dinamicas.*;
@@ -157,13 +163,13 @@ public class ArbolBin {
         int resultado = -1;
         
         if (!this.esVacio()){
-            resultado = nivelAux(this.raiz, elem, -1,);
+            resultado = nivelAux(this.raiz, elem, -1);
         }
         return resultado;
     }
 
 
-    private int nivelAux(NodoArbol n, Object elem, int nivel){ //TENGO QUE DETENER EJECUCION UNA VEZ QUE ENCUENTRA EL ELEMENTO!!!!
+    private int nivelAux(NodoArbol n, Object elem, int nivel){ 
         //metodo privado auxiliar al metodo nivel
         int resul = -1;
 
