@@ -1,6 +1,6 @@
 package tests.jerarquicas;
 
-import jerarquicas.ArbolBin;
+import jerarquicas.dinamicas.ArbolBin;
 import lineales.dinamicas.*;
 
 public class TestArbolBinPropio {
