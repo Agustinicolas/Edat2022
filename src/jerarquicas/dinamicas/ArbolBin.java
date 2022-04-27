@@ -4,7 +4,7 @@
  * FAI-505
  *
  */
-package jerarquicas;
+package jerarquicas.dinamicas;
 
 import lineales.dinamicas.*;
 
@@ -87,20 +87,21 @@ public class ArbolBin {
     public Object padre(Object elemento){
         //Dado un elemento, devuelve el valor almacenado en su nodo padre (busca la primera aparicion del elemento)
         NodoArbol padre = new NodoArbol(null, null, null);
-        Object elem = new Object();
+        Object elem = null;
 
-        if(elemento.equals(this.raiz.getElem()) || this.esVacio()){
-            elem = null;
-        }else{
-            padre = padreAux(elemento, this.raiz);
+        if (!this.esVacio()){
+            if(elemento.equals(this.raiz.getElem()) || this.esVacio()){
+                elem = null;
+            }else{
+                padre = padreAux(elemento, this.raiz);
+            }
+
+            if (padre == null)
+                elem = null;
+         else
+             elem = padre.getElem();
         }
-
-        if (padre == null)
-            elem = null;
-        else
-            elem = padre.getElem();
-
-        return elem;
+            return elem;        
     }
 
 
@@ -188,15 +189,15 @@ public class ArbolBin {
     }
 
 
-    public Lista listarPreOrden(){
+    public Lista listarPreorden(){
         //retorna una lista con los elementos del arbol en PREORDEN
         Lista lis = new Lista();
-        listarPreOrdenAux(this.raiz, lis);
+        listarPreordenAux(this.raiz, lis);
         return lis;
     }
 
 
-    private void listarPreOrdenAux(NodoArbol nodo, Lista lis){
+    private void listarPreordenAux(NodoArbol nodo, Lista lis){
         //metodo recursivo privado porque su parametro es del tipo NodoArbol
 
         if(nodo != null){
@@ -204,56 +205,56 @@ public class ArbolBin {
             lis.insertar(nodo.getElem(), lis.longitud()+1); //(1)
 
             //recorre a sus hijos en preorden
-            listarPreOrdenAux(nodo.getIzquierdo(), lis); //(2)
-            listarPreOrdenAux(nodo.getDerecho(), lis); //(3)
+            listarPreordenAux(nodo.getIzquierdo(), lis); //(2)
+            listarPreordenAux(nodo.getDerecho(), lis); //(3)
         }
     }
 
 
-    public Lista listarInOrden(){
+    public Lista listarInorden(){
         //retorna una lista con los elementos del arbol en INORDEN
         Lista lis = new Lista();
-        listarInOrdenAux(this.raiz, lis);
+        listarInordenAux(this.raiz, lis);
         return lis;
     }
 
 
-    private void listarInOrdenAux(NodoArbol nodo, Lista lis){
+    private void listarInordenAux(NodoArbol nodo, Lista lis){
         //metodo recursivo privado porque su parametro es del tipo NodoArbol
 
         if(nodo != null){
             //recorre el hijo izquierdo en inorden
-            listarInOrdenAux(nodo.getIzquierdo(), lis); //(1)
+            listarInordenAux(nodo.getIzquierdo(), lis); //(1)
             //visita la raiz del subarbol
             lis.insertar(nodo.getElem(), lis.longitud()+1); //(2)
             //recorre el hijo derecho en inorden
-            listarPreOrdenAux(nodo.getDerecho(), lis); //(3)
+            listarInordenAux(nodo.getDerecho(), lis); //(3)
         }
     }
 
 
-    public Lista listarPosOrden(){
+    public Lista listarPosorden(){
         //retorna una lista con los elementos del arbol en POSORDEN
         Lista lis = new Lista();
-        listarPosOrdenAux(this.raiz, lis);
+        listarPosordenAux(this.raiz, lis);
         return lis;
     }
 
 
-    private void listarPosOrdenAux(NodoArbol nodo, Lista lis){
+    private void listarPosordenAux(NodoArbol nodo, Lista lis){
         //metodo recursivo privado porque su parametro es del tipo NodoArbol
 
         if(nodo != null){
             //recorre a sus hijos en posorden
-            listarPosOrdenAux(nodo.getIzquierdo(), lis); //(1)
-            listarPosOrdenAux(nodo.getDerecho(), lis); //(2)
+            listarPosordenAux(nodo.getIzquierdo(), lis); //(1)
+            listarPosordenAux(nodo.getDerecho(), lis); //(2)
             //visita el elemento del nodo
             lis.insertar(nodo.getElem(), lis.longitud()+1); //(3)
         }
     }
 
 
-    public Lista listarNiveles(){
+    public Lista listarPorNiveles(){
         //Devuelve una lista con los elementos del arbol binario en recorrido por niveles
         Cola cola = new Cola();
         Lista lis = new Lista();
@@ -342,6 +343,37 @@ public class ArbolBin {
             
         }
         return cadena;
+    }
+
+
+    public Lista frontera(){
+        //Devuelve una lista con todos los elementos almacenados en las hojas del arbol
+        //listadas de izquierda a derecha
+        Lista lis = new Lista();
+
+        if (!this.esVacio())
+            lis = fronteraAux(this.raiz, lis);
+
+        return lis;
+    }
+
+
+    private Lista fronteraAux(NodoArbol n, Lista lis){
+        //Metodo privado recursivo auxiliar al metodo frontera
+
+        if (n != null){
+            if (n.getDerecho() == null && n.getIzquierdo() == null){
+                lis.insertar(n.getElem(), lis.longitud()+1);
+            }else{
+                if ( n.getIzquierdo() != null){
+                    lis = fronteraAux(n.getIzquierdo(), lis);
+                }
+                if( n.getDerecho() != null){
+                    lis = fronteraAux(n.getDerecho(), lis);
+                }
+            }
+        }
+        return lis;
     }
 
 }

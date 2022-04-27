@@ -4,7 +4,7 @@
  * FAI-505
  *
  */
-package jerarquicas;
+package jerarquicas.dinamicas;
 
 public class NodoArbol {
     
