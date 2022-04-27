@@ -1,6 +1,5 @@
 package lineales.dinamicas;
 
-import javax.swing.text.Position;
 
 public class Lista {
      

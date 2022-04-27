@@ -54,10 +54,10 @@ public class TestArbolBinPropio {
         System.out.println("METODO PADRE EN 'D', ESPERA C --- " + arbol1.padre('D'));
         System.out.println("METODO PADRE EN 'C', ESPERA A --- " + arbol1.padre('C'));
 
-        listaPre = arbol1.listarPreOrden();
-        listaPos = arbol1.listarPosOrden();
-        listaIn = arbol1.listarInOrden();
-        listaNiv = arbol1.listarNiveles();
+        listaPre = arbol1.listarPreorden();
+        listaPos = arbol1.listarPosorden();
+        listaIn = arbol1.listarInorden();
+        listaNiv = arbol1.listarPorNiveles();
 
         System.out.println("\n LISTA PREORDEN:\n" + listaPre.toString() );
         System.out.println("\n LISTA POSORDEN:\n" + listaPos.toString());
