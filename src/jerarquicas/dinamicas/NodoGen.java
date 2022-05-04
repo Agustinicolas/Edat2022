@@ -34,7 +34,7 @@ public class NodoGen {
         this.elem = elem;
     }
 
-    public void setHijoDerecho(NodoGen nodo){
+    public void setHijoIzquierdo(NodoGen nodo){
         this.hijoIzquierdo = nodo;
     }
 
