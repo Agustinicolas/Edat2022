@@ -1,5 +1,6 @@
 package jerarquicas.dinamicas;
 import lineales.dinamicas.*;
+import java.math.*;
 
 public class ArbolGen {
     private NodoGen raiz;
