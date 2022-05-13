@@ -167,7 +167,44 @@ public class ArbolGen {
         }
         return padre;
     }
+    
+    public int altura(){
+        //Devuelve la altura del arbol, es decir la longitud del camino más largo desde la raíz hasta una hoja
+        //Un arbol vacío tiene altura -1, una hoja tiene altura 0
+        int altura = -1;
 
+        if (!this.esVacio()){
+            altura = 0;
+            altura = alturaAux(this.raiz);
+        }
+        return altura;
+    }
+
+
+    private int alturaAux(NodoGen n){
+        int altura= 0;
+        int altAux;
+        int altMayor = -1;
+
+        if(n!=null){
+            if(n.getHijoIzquierdo()!=null){
+                altura = alturaAux(n.getHijoIzquierdo())+1;
+            
+                NodoGen hermano = n.getHijoIzquierdo().getHermanoDerecho();
+                while(hermano != null){
+                    altAux = alturaAux(hermano)+1;
+                    if (altAux > altMayor){
+                        altMayor = altAux;
+                    }
+                    hermano = hermano.getHermanoDerecho();
+                }
+                altura = Math.max(altura, altMayor);
+            }
+
+            
+        }
+        return altura;
+    }
 
     private void listarInordenAux(NodoGen n, Lista ls){
         if (n != null){
