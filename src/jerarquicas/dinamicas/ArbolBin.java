@@ -89,7 +89,7 @@ public class ArbolBin {
         NodoArbol padre = new NodoArbol(null, null, null);
         Object elem = null;
 
-        if (!this.esVacio()){
+        if (this.raiz != null){
             if(elemento.equals(this.raiz.getElem()) || this.esVacio()){
                 elem = null;
             }else{
@@ -128,7 +128,7 @@ public class ArbolBin {
         //Un arbol vacío tiene altura -1, una hoja tiene altura 0
         int altura = -1;
 
-        if (!this.esVacio()){
+        if (this.raiz != null){
             altura = 0;
             altura = alturaAux(this.raiz);
         }
@@ -163,7 +163,7 @@ public class ArbolBin {
         //Devuelve el nivel de un elemento del arbol. Si el elemento no existe el arbol devuelve -1
         int resultado = -1;
         
-        if (!this.esVacio()){
+        if (this.raiz != null){
             resultado = nivelAux(this.raiz, elem, -1);
         }
         return resultado;
@@ -259,7 +259,7 @@ public class ArbolBin {
         Cola cola = new Cola();
         Lista lis = new Lista();
         NodoArbol nodoActual;
-        if (!this.esVacio()){
+        if (this.raiz != null){
             cola.poner(this.raiz);
             while ( !cola.esVacia()){
                 nodoActual = (NodoArbol) cola.obtenerFrente();
@@ -289,7 +289,7 @@ public class ArbolBin {
 
         ArbolBin arbolClon = new ArbolBin();
 
-        if(!this.esVacio()){
+        if(this.raiz != null){
             arbolClon.raiz = cloneAux(this.raiz);
         }
 
@@ -317,7 +317,7 @@ public class ArbolBin {
         //Genera y devuelve una cadena de caracteres que indica cual es la raiz del arbol
         //y quienes son los hijos de cada nodo
         String cadena = "";
-        if (this.esVacio()){
+        if (this.raiz == null){
             cadena = "Arbol vacio.";
         }else{
             cadena = toStringAux(this.raiz);
@@ -351,7 +351,7 @@ public class ArbolBin {
         //listadas de izquierda a derecha
         Lista lis = new Lista();
 
-        if (!this.esVacio())
+        if (this.raiz != null)
             lis = fronteraAux(this.raiz, lis);
 
         return lis;

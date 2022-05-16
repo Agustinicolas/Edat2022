@@ -1,14 +1,32 @@
 package tests.jerarquicas;
 import jerarquicas.dinamicas.*;
+import lineales.dinamicas.*;
 
 public class TestArbolGenPropio {
     public static void main(String[] args){
         ArbolGen arbol1 = new ArbolGen();
         ArbolGen arbol2;
+        Lista lis;
         boolean exito;
 
         System.out.println("IMPRESION ARBOL VACIO:");
         System.out.println(arbol1.toString()+"\n");
+
+        lis = arbol1.listarInorden();
+        System.out.println("Impresion InOrden arbol vacio:");
+        System.out.println(lis.toString());
+
+        lis = arbol1.listarPreorden();
+        System.out.println("Impresion PreOrden arbol vacio:");
+        System.out.println(lis.toString());
+
+        lis = arbol1.listarPosorden();
+        System.out.println("Impresion PosOrden arbol vacio:");
+        System.out.println(lis.toString());
+
+        lis = arbol1.listarNiveles();
+        System.out.println("Impresion por niveles arbol vacio:");
+        System.out.println(lis.toString());
 
         exito = arbol1.esVacio();
         System.out.println("Metodo esVacio en arbol vacio, espera true: \t"+exito);
@@ -17,6 +35,8 @@ public class TestArbolGenPropio {
 
         exito = arbol1.pertenece(55);
         System.out.println("Metodo pertenece en arbol vacio, espera false: \t"+exito);
+
+        System.out.println("Metodo nivel en arbol vacío, espera -1 \t"+(arbol1.nivel(123) == -1));
 
         exito = arbol1.insertar('A', 'F');
         System.out.println("Insercion elemento 'A' en arbol vacío, espera true:\t"+exito);
@@ -32,6 +52,8 @@ public class TestArbolGenPropio {
 
         exito = arbol1.insertar('B', 'F');
         System.out.println("Insercion elemento 'B' en padre inexistente, espera false:\t"+exito);
+        System.out.println("Metodo nivel en elemento inexistente, espera -1 \t"+(arbol1.nivel(123) == -1));
+        System.out.println("Metodo nivel en elemento raiz, espera 0 \t"+(arbol1.nivel('A') == -1));
 
         System.out.println(arbol1.toString()+"\n");
 
@@ -53,6 +75,10 @@ public class TestArbolGenPropio {
 
         System.out.println(arbol1.toString()+"\n");
 
+        System.out.println("Metodo nivel en elemento B, espera 1\t"+ (arbol1.nivel('B')));
+        System.out.println("Metodo nivel en elemento E, espera 2\t"+ (arbol1.nivel('E')));
+        System.out.println("Metodo nivel en elemento inexistente, espera -1\t"+ (arbol1.nivel('K')));
+
         exito = arbol1.pertenece(55);
         System.out.println("Metodo pertenece con elemento inexistente, espera false: \t"+exito);
 
@@ -64,6 +90,22 @@ public class TestArbolGenPropio {
 
         exito = arbol1.esVacio();
         System.out.println("Metodo esVacio en arbol no vacio, espera false: \t"+exito);
+
+        lis = arbol1.listarInorden();
+        System.out.println("Impresion InOrden arbol:");
+        System.out.println(lis.toString());
+
+        lis = arbol1.listarPreorden();
+        System.out.println("Impresion PreOrden arbol:");
+        System.out.println(lis.toString());
+
+        lis = arbol1.listarPosorden();
+        System.out.println("Impresion PosOrden arbol:");
+        System.out.println(lis.toString());
+
+        lis = arbol1.listarNiveles();
+        System.out.println("Impresion por niveles arbol:");
+        System.out.println(lis.toString());
 
         System.out.println("Metodo padre('E'), espera 'D'\t"+ (arbol1.padre('E').equals('D')));
 

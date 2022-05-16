@@ -11,13 +11,7 @@ public class ArbolGen {
         this.raiz = null;
     }
 
-    public Lista listarInorden(){
-        Lista salida = new Lista();
-        listarInordenAux(this.raiz, salida);
-        return salida;
-    }
-
-
+    
     public boolean insertar(Object elemNuevo, Object padre){
         /*
         Dado un elemento elemNuevo y un elemento padre, agrega elemNuevo como hijo de la primera aparición de padre.
@@ -207,6 +201,93 @@ public class ArbolGen {
         return altura;
     }
 
+    public int nivel(Object elem){
+        //Devuelve el nivel de un elemento en el arbol. si el elemento no existe en el arbol, o el arbol es vacío devuelve -1.
+        
+        int nivel = -1;
+        if (this.raiz != null){
+            nivel = nivelAux(this.raiz, elem, nivel);
+        }
+
+        return nivel;
+    }
+
+
+    private int nivelAux(NodoGen n, Object elem, int niv){
+        //Metodo privado recursivo auxiliar al metodo nivel
+        int resul = -1;
+
+        if (n != null){
+            if(n.getElem().equals(elem)){
+                resul = niv +1;
+            }else{
+                    if(n.getHijoIzquierdo()!= null){
+                        resul = nivelAux(n.getHijoIzquierdo(), elem, niv+1);
+                        if(resul == -1){
+                            NodoGen hermano = n.getHijoIzquierdo().getHermanoDerecho();
+                            while(hermano != null && resul == -1){
+                                resul = nivelAux(hermano, elem, niv+1);
+                                hermano = hermano.getHermanoDerecho();
+                            }
+                        }
+                    }
+                }
+            }
+        return resul;
+    }
+
+
+    public Lista listarPreorden(){
+        Lista salida = new Lista();
+        listarPreordenAux(this.raiz, salida);
+        return salida;
+    }
+
+
+    private void listarPreordenAux(NodoGen n, Lista lis){
+        if(n != null){
+            lis.insertar(n.getElem(), lis.longitud()+1);
+            if (n.getHijoIzquierdo() != null){
+                listarPreordenAux(n.getHijoIzquierdo(), lis);
+                NodoGen hermano = n.getHijoIzquierdo().getHermanoDerecho();
+                while (hermano != null){
+                    listarPreordenAux(hermano, lis);
+                    hermano = hermano.getHermanoDerecho();
+                }
+            }
+        }
+    }
+
+
+    public Lista listarPosorden(){
+        Lista salida = new Lista();
+        listarPosordenAux(this.raiz, salida);
+        return salida;
+    }
+
+
+    private void listarPosordenAux(NodoGen n, Lista lis){
+        if(n != null){            
+            if (n.getHijoIzquierdo() != null){
+                listarPosordenAux(n.getHijoIzquierdo(), lis);
+                NodoGen hermano = n.getHijoIzquierdo().getHermanoDerecho();
+                while (hermano != null){
+                    listarPosordenAux(hermano, lis);
+                    hermano = hermano.getHermanoDerecho();
+                }
+            }
+            lis.insertar(n.getElem(), lis.longitud()+1);
+        }
+    }
+
+
+    public Lista listarInorden(){
+        Lista salida = new Lista();
+        listarInordenAux(this.raiz, salida);
+        return salida;
+    }
+
+
     private void listarInordenAux(NodoGen n, Lista ls){
         if (n != null){
             //llamado recursivo al primer hijo de n
@@ -227,6 +308,32 @@ public class ArbolGen {
             }
         }
     }
+
+
+    public Lista listarNiveles(){
+        Lista salida = new Lista();
+        Cola colaAux = new Cola();
+        NodoGen nodoActual;
+        if(this.raiz != null){
+            colaAux.poner(this.raiz);
+            while(!(colaAux.esVacia())){
+                nodoActual = (NodoGen) colaAux.obtenerFrente();
+                salida.insertar(nodoActual.getElem(), salida.longitud()+1);
+                colaAux.sacar();
+                if (nodoActual.getHijoIzquierdo() != null){
+                    colaAux.poner(nodoActual.getHijoIzquierdo());
+                    NodoGen hermano = nodoActual.getHijoIzquierdo().getHermanoDerecho();
+                    while(hermano != null){
+                        colaAux.poner(hermano);
+                        hermano = hermano.getHermanoDerecho();
+                    }
+                }
+            }
+        }
+        return salida;
+    }
+
+
 
     @Override
     public String toString(){
