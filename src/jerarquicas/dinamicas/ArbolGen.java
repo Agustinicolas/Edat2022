@@ -334,6 +334,35 @@ public class ArbolGen {
     }
 
 
+    public ArbolGen clone(){
+        ArbolGen clon = new ArbolGen();
+
+            if(this.raiz != null){
+                clon.raiz = cloneAux(this.raiz);
+            }
+
+        return clon;
+    }
+
+
+    private NodoGen cloneAux(NodoGen n){
+        NodoGen nuevo = new NodoGen(null, null, null);
+        if (n != null){
+            nuevo.setElem(n.getElem());
+            if(n.getHijoIzquierdo() != null){
+                nuevo.setHijoIzquierdo(cloneAux(n.getHijoIzquierdo()));
+                NodoGen hermano = n.getHijoIzquierdo().getHermanoDerecho();
+                NodoGen aux = nuevo.getHijoIzquierdo();
+                while (hermano != null){
+                    aux.setHermanoDerecho(cloneAux(hermano));
+                    hermano = hermano.getHermanoDerecho();
+                    aux = aux.getHermanoDerecho();
+                }
+            }
+        }
+        return nuevo;
+    }
+
 
     @Override
     public String toString(){

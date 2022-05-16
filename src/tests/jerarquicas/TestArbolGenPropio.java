@@ -12,6 +12,10 @@ public class TestArbolGenPropio {
         System.out.println("IMPRESION ARBOL VACIO:");
         System.out.println(arbol1.toString()+"\n");
 
+        System.out.println("CLON ARBOL VACIO");
+        arbol2 = arbol1.clone();
+        System.out.println(arbol2.toString()+"\n");
+
         lis = arbol1.listarInorden();
         System.out.println("Impresion InOrden arbol vacio:");
         System.out.println(lis.toString());
@@ -106,6 +110,10 @@ public class TestArbolGenPropio {
         lis = arbol1.listarNiveles();
         System.out.println("Impresion por niveles arbol:");
         System.out.println(lis.toString());
+
+        System.out.println("\nCLON ARBOL");
+        arbol2 = arbol1.clone();
+        System.out.println(arbol2.toString()+"\n");
 
         System.out.println("Metodo padre('E'), espera 'D'\t"+ (arbol1.padre('E').equals('D')));
 
