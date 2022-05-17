@@ -127,6 +127,11 @@ public class ArbolGen {
     }
 
 
+    public void vaciar(){
+        this.raiz = null;
+    }
+
+
     public Object padre(Object elem){
         //Dado un elemento devuelve el objeto almacenado en su nodo padre (busca la primera aparicion del elemento)
         NodoGen padre = null;
@@ -237,6 +242,53 @@ public class ArbolGen {
     }
 
 
+    public Lista ancestros(Object elem){
+        //Si el elemento se encuentra en el arbol, devuelve una lista con el camino desde la raiz hasta dicho elemento.
+        //el metodo auxiliar devuelve una pila con el recorrido desde el elemento en cuestión hacia la raíz, luego se insertan los elementos de la lista
+        //a medida que la pila se vacía, así la lista final muestra el recorrido de ancestros a partir de la raíz
+        Lista lis = new Lista();
+        Pila pila = new Pila();
+        if (this.raiz != null){
+            ancestrosAux(elem, pila, this.raiz, false);
+        }
+        while(!pila.esVacia()){
+            lis.insertar(pila.obtenerTope(), lis.longitud()+1);
+            pila.desapilar();
+        }
+        return lis;
+    }
+
+
+    private boolean ancestrosAux(Object elem, Pila pila,NodoGen n, boolean encontrado){
+        //Metodo auxiliar recursivo al metodo ancestros
+        //recorre en posorden el arbol en busca del Object elem ingresado por parametro
+        //Una vez que lo encuentra, apila desde el nodo que tiene su elemento hasta la raíz, recorriendo sus ancestros
+        //devuelve true o false en caso de haber encontrado el elemento en el arbol o no
+        if (n != null){ 
+            
+            if (elem.equals(n.getElem())){ //verifica si el nodo n es el elemento buscado
+                encontrado = true;
+            }
+            if (!encontrado){
+                if(n.getHijoIzquierdo()!=null){//recorrido posorden del arbol
+                    encontrado = ancestrosAux(elem, pila, n.getHijoIzquierdo(), encontrado); //recorre subarbol del primer hijo izquierdo
+                    if(!encontrado){
+                        NodoGen hermano = n.getHijoIzquierdo().getHermanoDerecho();
+                        while(hermano != null && !encontrado){ //recorre recursivamente el resto de los hijos (hermanos del primer hijo izquierdo)
+                            encontrado = ancestrosAux(elem, pila, hermano, encontrado);
+                            hermano = hermano.getHermanoDerecho();
+                        }
+                    }
+                }
+            }
+            if (encontrado){
+                pila.apilar(n.getElem()); //si se encontró el elemento en el recorrido, se apila el elemento del nodo
+            }
+        }
+        return encontrado;
+    }
+
+
     public Lista listarPreorden(){
         Lista salida = new Lista();
         listarPreordenAux(this.raiz, salida);
@@ -310,7 +362,7 @@ public class ArbolGen {
     }
 
 
-    public Lista listarNiveles(){
+    public Lista listarPorNiveles(){
         Lista salida = new Lista();
         Cola colaAux = new Cola();
         NodoGen nodoActual;

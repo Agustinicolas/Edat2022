@@ -28,7 +28,7 @@ public class TestArbolGenPropio {
         System.out.println("Impresion PosOrden arbol vacio:");
         System.out.println(lis.toString());
 
-        lis = arbol1.listarNiveles();
+        lis = arbol1.listarPorNiveles();
         System.out.println("Impresion por niveles arbol vacio:");
         System.out.println(lis.toString());
 
@@ -107,7 +107,7 @@ public class TestArbolGenPropio {
         System.out.println("Impresion PosOrden arbol:");
         System.out.println(lis.toString());
 
-        lis = arbol1.listarNiveles();
+        lis = arbol1.listarPorNiveles();
         System.out.println("Impresion por niveles arbol:");
         System.out.println(lis.toString());
 
@@ -116,6 +116,18 @@ public class TestArbolGenPropio {
         System.out.println(arbol2.toString()+"\n");
 
         System.out.println("Metodo padre('E'), espera 'D'\t"+ (arbol1.padre('E').equals('D')));
+
+        lis = arbol1.ancestros('J');
+        System.out.println("Metodo ancestro elem inexistente, espera lista vacía\n"+lis.toString());
+
+        lis = arbol1.ancestros('E');
+        System.out.println("Metodo ancestro elem E, espera lista \n"+lis.toString());
+
+        System.out.println("VACIADO ARBOL ORIGINAL");
+        arbol1.vaciar();
+
+        System.out.println("Arbol original:\n"+arbol1.toString());
+        System.out.println("\nArbol clon:\n"+arbol2.toString());
 
     }
 }
