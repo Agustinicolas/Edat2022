@@ -505,4 +505,71 @@ public class ArbolGen {
         return s;
     }
 
+
+    public Lista frontera(){
+        //Devuelve una lista con los elementos frontera del arbol en orden de recorrido preorden
+        Lista lis = new Lista();
+        if (this.raiz != null){
+            fronteraAux(this.raiz, lis);
+        }
+        return lis;
+    }
+
+
+    private void fronteraAux(NodoGen n, Lista lis){
+        if (n != null){
+            if(n.getHijoIzquierdo() == null){
+                lis.insertar(n.getElem(), lis.longitud()+1);
+            }else{
+                fronteraAux(n.getHijoIzquierdo(), lis);
+                NodoGen hermano = n.getHijoIzquierdo().getHermanoDerecho();
+                while (hermano != null){
+                    fronteraAux(hermano, lis);
+                    hermano = hermano.getHermanoDerecho();
+                }
+            }
+        }
+    }
+
+    public boolean sonFrontera(Lista unaLista){
+        /*
+        recibe una lista de elementos almacenada en una estructura del tipo TDA Lista y verifica si la lista contiene los elementos de la 
+        frontera del árbol, sin importar el orden en que aparezcan los elementos en la lista elementos de la frontera del árbol.
+        precondición del método sonFrontera: la lista no tiene elementos repetidos
+        */
+        
+        boolean sonFrontera = false;
+        Lista frontera = this.frontera();   //Lista con los elementos frontera del arbol
+        Pila front = listaApila(frontera);  //pila que contiene la frontera del arbol
+        Lista lis = unaLista.clone();   //Lista clon de la lista ingresada por parametro
+
+        if (!lis.esVacia()){
+            sonFrontera = true;
+            while(!front.esVacia() && sonFrontera){     //Estructura repetitiva, busca el tope de la pila de elementos frontera en la lista ingresada por parametro
+                int pos = lis.localizar(front.obtenerTope());
+                if (pos == -1){     //si la lista no contiene este elemento de la frontera
+                    sonFrontera = false;
+                }else{      //si la lista contiene este elemento de la frontera
+                    front.desapilar();                    
+                }
+            }
+        }
+        return sonFrontera;
+    }
+
+    private Pila listaApila(Lista lis){
+        //metodo privado auxiliar al metodo sonFrontera
+        //crea una pila a partir de la lista que contiene la frontera del arbol
+
+        Pila pila = new Pila();
+        while (!lis.esVacia()){
+            pila.apilar(lis.recuperar(1));
+            lis.eliminar(1);
+        }
+        return pila;
+    }
+
+
+    
+
 }
