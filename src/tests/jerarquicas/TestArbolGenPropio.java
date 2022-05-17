@@ -16,6 +16,8 @@ public class TestArbolGenPropio {
         arbol2 = arbol1.clone();
         System.out.println(arbol2.toString()+"\n");
 
+        System.out.println("Metodo grado en arbol vacío, espera 0\t"+arbol1.grado('A'));
+
         lis = arbol1.listarInorden();
         System.out.println("Impresion InOrden arbol vacio:");
         System.out.println(lis.toString());
@@ -122,6 +124,10 @@ public class TestArbolGenPropio {
 
         lis = arbol1.ancestros('E');
         System.out.println("Metodo ancestro elem E, espera lista \n"+lis.toString());
+
+        System.out.println("Metodo grado en raíz, espera 3\t"+arbol1.grado('A'));
+        System.out.println("Metodo grado en 'B', espera 0\t"+arbol1.grado('B'));
+        System.out.println("Metodo grado en 'D', espera 1\t"+arbol1.grado('B'));
 
         System.out.println("VACIADO ARBOL ORIGINAL");
         arbol1.vaciar();

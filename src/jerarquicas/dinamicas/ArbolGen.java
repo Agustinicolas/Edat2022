@@ -136,10 +136,12 @@ public class ArbolGen {
         //Dado un elemento devuelve el objeto almacenado en su nodo padre (busca la primera aparicion del elemento)
         NodoGen padre = null;
         Object elemPadre = null;
-        if(this.raiz != null){
-            padre = padreAux(this.raiz,elem);
-            if(padre != null)
-                elemPadre = padre.getElem();
+        if(this.raiz != null ){
+            if(!this.raiz.getElem().equals(elem)){
+                padre = padreAux(this.raiz,elem);
+                if(padre != null)
+                    elemPadre = padre.getElem();
+            }
         }
         
         return elemPadre;
@@ -159,8 +161,13 @@ public class ArbolGen {
                 if(padre == null){
                     NodoGen hermano = n.getHijoIzquierdo().getHermanoDerecho();
                     while ( hermano != null && padre == null){
-                        padre = padreAux(hermano, buscado);
-                        hermano = hermano.getHermanoDerecho();
+                        if(hermano.getElem().equals(buscado)){
+                            padre = n;
+                        }
+                        if (padre == null){
+                            padre = padreAux(hermano, buscado);
+                            hermano = hermano.getHermanoDerecho();
+                        }
                     }
                 }
             }
@@ -280,12 +287,66 @@ public class ArbolGen {
                         }
                     }
                 }
+                if (encontrado){
+                    pila.apilar(n.getElem()); //si se encontró el elemento en el recorrido, se apila el elemento del nodo
+                }
             }
-            if (encontrado){
-                pila.apilar(n.getElem()); //si se encontró el elemento en el recorrido, se apila el elemento del nodo
-            }
+            
         }
         return encontrado;
+    }
+
+
+    public int grado(){
+        //metodo que devuelve el grado (cantidad de hijos) de un elemento del arbol dado.
+        //utiliza el metodo privado auxiliar obtenernodo para realizar la búsqueda del elemento
+        int grado = -1;
+        if(this.raiz != null){            
+            grado = gradoSubarbolAux(this.raiz, grado);
+            
+        }
+        return grado;
+    }
+
+
+    public int gradoSubarbol(Object elem){
+        //metodo que devuelve el grado del subarbol a partir del elemento ingresado por parámetro
+
+        int grado = -1;
+        if(this.raiz != null){
+            NodoGen buscado = this.obtenerNodo(this.raiz, elem);
+            if (buscado != null){
+                grado = gradoSubarbolAux(buscado, grado);
+            }
+        }
+        return grado;
+    }
+
+
+    private int gradoSubarbolAux(NodoGen n, int grado){
+        //metodo privado auxiliar al metodo gradosubarbol
+        int g = 0;
+        if (n != null){
+            if (n.getHijoIzquierdo() != null){
+                g++;
+                NodoGen hermano = n.getHijoIzquierdo().getHermanoDerecho();
+                while(hermano != null){
+                    g++;
+                    hermano = hermano.getHermanoDerecho();
+                }
+                grado = gradoSubarbolAux(n.getHijoIzquierdo(), g);
+                if (g > grado)
+                    grado = g;
+                hermano = n.getHijoIzquierdo().getHermanoDerecho();
+                while(hermano != null){
+                    grado = gradoSubarbolAux(hermano, g);
+                    hermano = hermano.getHermanoDerecho();
+                }           
+            }
+            if (g > grado)
+                    grado = g;
+        }
+        return grado;
     }
 
 
