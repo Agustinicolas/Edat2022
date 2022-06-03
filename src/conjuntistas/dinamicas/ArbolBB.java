@@ -174,6 +174,25 @@ public class ArbolBB {
         }
     }
     
+    
+    public Comparable minimoElem(){
+        Comparable elem = null;
+        if(this.raiz != null){
+            elem = minimoElemAux(this.raiz);
+        }
+        return elem;
+    }
+
+    private Comparable minimoElemAux(NodoArbol n){
+        Comparable elem;
+        if(n.getIzquierdo() == null){
+            elem = n.getElem();
+        }else{
+            elem = minimoElemAux(n.getIzquierdo());
+        }
+        return elem;
+    }
+    
 
     @Override
     public String toString(){
