@@ -7,6 +7,8 @@ public class TestABBPropio {
   public static void main(String[] args){
     ArbolBB a1 = new ArbolBB();
     ArbolBB a2 = new ArbolBB();
+    Lista lis = new Lista();
+    Comparable elem;
     boolean exito;
 
     System.out.println("IMPRESION ARBOL VACIO:");
@@ -14,6 +16,8 @@ public class TestABBPropio {
     lis = a1.listar();
     System.out.println("listar arbol vacio");
     System.out.println(lis.toString()+"\n");
+    elem = a1.minimoElem();
+    System.out.println("Metodo minimoElem arbol vacio, espera null\t"+ (elem == null));
 
     exito = a1.insertar(5);
     System.out.println("Insercion elemento 5 arbol vacio, espera true\t"+exito);
@@ -37,6 +41,9 @@ public class TestABBPropio {
     exito = a1.insertar(1);
     System.out.println("Insercion elemento 1 arbol, espera true\t"+exito);
     System.out.println(a1.toString());
+    
+    elem = a1.minimoElem();
+    System.out.println("Metodo minimoElem arbol, espera 1\t"+elem.toString());
     
     System.out.println("\nlistar arbol");
     lis = a1.listar();
