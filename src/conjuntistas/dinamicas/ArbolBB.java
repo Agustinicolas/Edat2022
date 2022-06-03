@@ -226,22 +226,23 @@ public class ArbolBB {
         //metodo recursivo auxiliar al metodo listarRango
         //parametro booleano completado indica si se completó el recorrido, es decir n es mayor a cota superior
         if(n != null){
-            if(n.getIzquierdo() != null){
-                listarRangoAux(n.getIzquierdo(), min, max, lis, completado);    //si n tiene hijo izquierdo y recorrido no está completo, recorre subarbol izq
-            }
+            boolean limiteIzq = (n.getElem().compareTo(min) >= 0);     //si n es mayor o igual a cota inferior, es true
+            boolean limiteDer = (n.getElem().compareTo(max) <= 0);      //si n es menor o igual a cota superior, es true
             if(!completado){
-                boolean limiteIzq = ( n.getElem().compareTo(min) >= 0);     //si n es mayor a cota inferior, es true
-                boolean limiteDer = (n.getElem().compareTo(max) <= 0);      //si n es menor a cota superior, es true
-                if (limiteIzq && !limiteDer){   //si n es mayor a cota inferior y mayor a cota superior, se termina de recorrer el arbol seteando completado a true
-                    completado = true;
+                if(limiteIzq && n.getIzquierdo() != null){
+                    listarRangoAux(n.getIzquierdo(), min, max, lis, completado);    //si n tiene hijo izquierdo y recorrido no está completo, recorre subarbol izq
                 }
-
                 if(limiteIzq && limiteDer){
                     lis.insertar(n.getElem(), lis.longitud()+1);    //si el elemento se encuentra dentro del rango, se agrega a la lista
-                }
-                if(n.getDerecho()!= null){
+                }   
+                             
+                if(limiteDer && n.getDerecho()!= null){
                     listarRangoAux(n.getDerecho(), min, max, lis, completado);  //si n tiene hijo derecho y el recorrido no está completo, recorre subarbol derecho
-                }
+                }    
+                if (limiteIzq && !limiteDer){   //si n es mayor a cota inferior y mayor a cota superior, se termina de recorrer el arbol seteando completado a true
+                    completado = true;
+                }          
+                
             }
         }
 
