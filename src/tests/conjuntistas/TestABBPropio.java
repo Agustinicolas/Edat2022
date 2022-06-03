@@ -20,6 +20,9 @@ public class TestABBPropio {
     System.out.println("Metodo minimoElem arbol vacio, espera null\t"+ (elem == null));
     elem = a1.maximoElem();
     System.out.println("Metodo maximoElem arbol vacio, espera null\t"+ (elem == null));
+    lis = a1.listarRango(1,4);
+    System.out.println("listarRango arbol vacio");
+    System.out.println(lis.toString());
 
     exito = a1.insertar(5);
     System.out.println("Insercion elemento 5 arbol vacio, espera true\t"+exito);
@@ -52,6 +55,10 @@ public class TestABBPropio {
     System.out.println("\nlistar arbol");
     lis = a1.listar();
     System.out.println(lis.toString()+"\n");
+    
+    lis = a1.listarRango(2,5);
+    System.out.println("listarRango rango [2,8], espera 2|3|4|5|8\n");
+    System.out.println(lis.toString());
 
     exito = a1.eliminar(2);
     System.out.println("Metodo eliminar elemento 2, espera true\t"+exito);
