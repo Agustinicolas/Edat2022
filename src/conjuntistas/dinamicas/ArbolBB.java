@@ -1,4 +1,5 @@
 package conjuntistas.dinamicas;
+import lineales.dinamicas.Lista;
 
 public class ArbolBB {
 
@@ -151,30 +152,28 @@ public class ArbolBB {
     }
 
 
-    private NodoArbol padre(Comparable buscado){
-        NodoArbol padre = new NodoArbol(null,null,null);
-        if (this.raiz != null && (buscado.compareTo(this.raiz.getElem())!=0)){
-            padre = padreAux(this.raiz, buscado);
+    public Lista listar(){
+        Lista lis = new Lista();
+        if(this.raiz != null){
+            listarAux(this.raiz, lis);
         }
-        return padre;
+        return lis;
     }
 
-    private NodoArbol padreAux(NodoArbol n, Comparable elemento){
-    //Metodo privado auxiliar del metodo padre
-    NodoArbol padre = null;
 
-    if (n != null){
-        if ( (n.getIzquierdo() != null && n.getIzquierdo().getElem().equals(elemento)) || (n.getDerecho() != null && n.getDerecho().getElem().equals(elemento)) ){
-            padre = n;
-        }else{
-            padre = padreAux(n.getIzquierdo(), elemento);
-            if ( padre == null){
-                padre = padreAux(n.getDerecho(), elemento);
+    private void listarAux(NodoArbol n, Lista lis){
+        
+        if(n != null){
+            if(n.getIzquierdo() != null){
+                listarAux(n.getIzquierdo(), lis);
+            }
+            lis.insertar(n.getElem(), lis.longitud()+1);
+            if(n.getDerecho() != null){
+                listarAux(n.getDerecho(), lis);
             }
         }
     }
-    return padre;
-    }
+    
 
     @Override
     public String toString(){
