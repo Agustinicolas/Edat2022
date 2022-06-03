@@ -193,6 +193,25 @@ public class ArbolBB {
         return elem;
     }
     
+    
+    public Comparable maximoElem(){
+        Comparable elem = null;
+        if(this.raiz != null){
+            elem = maximoElemAux(this.raiz);
+        }
+        return elem;
+    }
+
+    private Comparable maximoElemAux(NodoArbol n){
+        Comparable elem;
+        if(n.getDerecho() == null){
+            elem = n.getElem();
+        }else{
+            elem = maximoElemAux(n.getDerecho());
+        }
+        return elem;
+    }
+    
 
     @Override
     public String toString(){
