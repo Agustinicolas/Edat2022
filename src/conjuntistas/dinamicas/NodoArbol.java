@@ -7,49 +7,49 @@
 package conjuntistas.dinamicas;
 
 public class NodoArbol {
-private Comparable elem;
-private NodoArbol izquierdo;
-private NodoArbol derecho;
+    private Comparable elem;
+    private NodoArbol izquierdo;
+    private NodoArbol derecho;
 
-//CONSTRUCTOR
-public NodoArbol(Comparable elem, NodoArbol izquierdo, NodoArbol derecho){
-this.elem = elem;
-this.izquierdo = izquierdo;
-this.derecho = derecho;
-}
+    //CONSTRUCTOR
+    public NodoArbol(Comparable elem, NodoArbol izquierdo, NodoArbol derecho){
+        this.elem = elem;
+        this.izquierdo = izquierdo;
+        this.derecho = derecho;
+    }
 
-//OBSERVADORES
+    //OBSERVADORES
 
-public Comparable getElem(){
+    public Comparable getElem(){
 
-return this.elem;
-}
+        return this.elem;
+    }
 
-public NodoArbol getIzquierdo(){
+    public NodoArbol getIzquierdo(){
 
-return this.izquierdo;
-}
+        return this.izquierdo;
+    }
 
-public NodoArbol getDerecho(){
+    public NodoArbol getDerecho(){
 
-return this.derecho;
-}
+        return this.derecho;
+    }
 
-//MODIFICADORES
+    //MODIFICADORES
 
-public void setElem(Comparable elemento){
+    public void setElem(Comparable elemento){
 
-this.elem = elemento;
-}
+        this.elem = elemento;
+    }
 
-public void setIzquierdo(NodoArbol nodo){
+    public void setIzquierdo(NodoArbol nodo){
 
-this.izquierdo = nodo;
-}
+        this.izquierdo = nodo;
+    }
 
-public void setDerecho(NodoArbol nodo){
+    public void setDerecho(NodoArbol nodo){
 
-this.derecho = nodo;
-}
+        this.derecho = nodo;
+    }
 }
 
