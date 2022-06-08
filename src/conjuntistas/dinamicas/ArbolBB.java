@@ -249,6 +249,49 @@ public class ArbolBB {
     }
     
 
+    public boolean pertenece(Comparable elem){
+        boolean pertenece = false;
+        if(this.raiz != null){
+            NodoArbol buscado = obtenerNodo(this.raiz, elem);        
+            if(buscado != null){
+                pertenece = true;
+            }
+        }
+        return pertenece;
+
+    }
+
+    private NodoArbol obtenerNodo(NodoArbol n, Comparable buscado){
+        // metodo privado que busca un elemento y devuelve el nodo que
+        //lo contiene. Si no se encuentra el buscado devuelve null
+        NodoArbol resultado = null;
+
+        if (n != null){
+            if (n.getElem().compareTo(buscado)==0){
+                //si el buscado es n, lo devuelve
+                resultado = n;
+            }else{
+                //no es el buscado: busca primero en el HI
+                resultado = obtenerNodo(n.getIzquierdo(), buscado);
+                //si no lo encontro en el HI, busca en el HD
+                if (resultado == null){
+                    resultado = obtenerNodo(n.getDerecho(), buscado);
+                }
+            }
+        }
+        return resultado;
+    }
+
+
+     public boolean esVacio(){
+        boolean vacio = false;
+        if(this.raiz == null){
+            vacio = true;
+        }
+        return vacio;
+    }
+
+
     @Override
     public String toString(){
         //Genera y devuelve una cadena de caracteres que indica cual es la raiz del arbol
