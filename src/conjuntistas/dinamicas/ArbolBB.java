@@ -1,10 +1,21 @@
+/*
+ *
+ * @author Hernandez Agustin 
+ * FAI-505
+ *
+ */
 package conjuntistas.dinamicas;
 import lineales.dinamicas.Lista;
 
 public class ArbolBB {
 
     //ATRIBUTOS
-    private NodoArbol raiz = null;
+    private NodoArbol raiz;
+
+    //CONSTRUCTOR
+    public ArbolBB(){
+        this.raiz = null;
+    }
 
     //METODOS PROPIOS
     public boolean insertar(Comparable elemento){
