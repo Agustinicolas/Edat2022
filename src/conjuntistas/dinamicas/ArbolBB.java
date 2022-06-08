@@ -216,80 +216,41 @@ public class ArbolBB {
     public Lista listarRango(Comparable min, Comparable max){
         Lista lis = new Lista();
         if(this.raiz != null){
-            listarRangoAux(this.raiz, min, max, lis, false); //por primera vez ingresa con parameto booleano false
+            listarRangoAux(this.raiz, min, max, lis); //por primera vez ingresa con parameto booleano false
         }
         return lis;
     }
 
 
-    private void listarRangoAux(NodoArbol n, Comparable min, Comparable max, Lista lis, boolean completado){
+    private void listarRangoAux(NodoArbol n, Comparable min, Comparable max, Lista lis){
         //metodo recursivo auxiliar al metodo listarRango
         //parametro booleano completado indica si se completó el recorrido, es decir n es mayor a cota superior
         if(n != null){
-            boolean limiteIzq = (n.getElem().compareTo(min) >= 0);     //si n es mayor o igual a cota inferior, es true
-            boolean limiteDer = (n.getElem().compareTo(max) <= 0);      //si n es menor o igual a cota superior, es true
-            if(!completado){
-                if(limiteIzq && n.getIzquierdo() != null){
-                    listarRangoAux(n.getIzquierdo(), min, max, lis, completado);    //si n tiene hijo izquierdo y recorrido no está completo, recorre subarbol izq
+            boolean limiteIzq = (n.getElem().compareTo(min) >= 0);     //si n es mayor a cota inferior
+            boolean limiteDer = (n.getElem().compareTo(max) <= 0);      //si n es menor a cota superior           
+
+            if(n.getElem().compareTo(min) < 0){    //n es menor a la cota menor, se busca en subarbol derecho
+                listarRangoAux(n.getDerecho(), min, max, lis);
+            }else if(n.getElem().compareTo(max) > 0){   //n es mayor a cota superior, se busca en subarbol izquierdo
+                listarRangoAux(n.getIzquierdo(), min, max, lis);
+            }else{  //si n se encuentra en el intervalo
+                if (limiteIzq && n.getIzquierdo() != null){     //si n es mayor o igual a cota izq y n tiene HI -> se recorre subarbol izquierdo
+                    listarRangoAux(n.getIzquierdo(), min, max, lis);
                 }
                 if(limiteIzq && limiteDer){
-                    lis.insertar(n.getElem(), lis.longitud()+1);    //si el elemento se encuentra dentro del rango, se agrega a la lista
-                }   
-                             
-                if(limiteDer && n.getDerecho()!= null){
-                    listarRangoAux(n.getDerecho(), min, max, lis, completado);  //si n tiene hijo derecho y el recorrido no está completo, recorre subarbol derecho
-                }    
-                if (limiteIzq && !limiteDer){   //si n es mayor a cota inferior y mayor a cota superior, se termina de recorrer el arbol seteando completado a true
-                    completado = true;
-                }          
-                
+                    lis.insertar(n.getElem(), lis.longitud()+1);    //si n está en el intervalo se agrega a la lista
+                }
+                if(limiteDer && n.getDerecho() != null){        //si n es menor o igual a cota derecha y tiene HD -> se recorre subarbol derecho
+                    listarRangoAux(n.getDerecho(), min, max, lis);
+                }
             }
+            
         }
 
     }
     
 
-    public boolean pertenece(Comparable elem){
-        boolean pertenece = false;
-        if(this.raiz != null){
-            NodoArbol buscado = obtenerNodo(this.raiz, elem);        
-            if(buscado != null){
-                pertenece = true;
-            }
-        }
-        return pertenece;
-
-    }
-
-    private NodoArbol obtenerNodo(NodoArbol n, Comparable buscado){
-        // metodo privado que busca un elemento y devuelve el nodo que
-        //lo contiene. Si no se encuentra el buscado devuelve null
-        NodoArbol resultado = null;
-
-        if (n != null){
-            if (n.getElem().compareTo(buscado)==0){
-                //si el buscado es n, lo devuelve
-                resultado = n;
-            }else{
-                //no es el buscado: busca primero en el HI
-                resultado = obtenerNodo(n.getIzquierdo(), buscado);
-                //si no lo encontro en el HI, busca en el HD
-                if (resultado == null){
-                    resultado = obtenerNodo(n.getDerecho(), buscado);
-                }
-            }
-        }
-        return resultado;
-    }
-
-
-     public boolean esVacio(){
-        boolean vacio = false;
-        if(this.raiz == null){
-            vacio = true;
-        }
-        return vacio;
-    }
+    
 
 
     @Override

@@ -56,8 +56,8 @@ public class TestABBPropio {
     lis = a1.listar();
     System.out.println(lis.toString()+"\n");
     
-    lis = a1.listarRango(2,5);
-    System.out.println("listarRango rango [2,8], espera 2|3|4|5|8\n");
+    lis = a1.listarRango(1,3);
+    System.out.println("listarRango rango [1,3], espera 1 | 2 | 3 \n");
     System.out.println(lis.toString());
 
     exito = a1.eliminar(2);
