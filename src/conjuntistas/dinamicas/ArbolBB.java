@@ -261,6 +261,14 @@ public class ArbolBB {
     }
     
 
+    public boolean esVacio(){
+        boolean vacio = false;
+        if (this.raiz == null){
+            vacio = true;
+        }
+        return vacio;
+    }
+
     
 
 

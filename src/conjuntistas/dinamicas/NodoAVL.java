@@ -7,25 +7,44 @@
 package conjuntistas.dinamicas;
 import java.lang.Math;
 
-public class NodoAVL extends NodoArbol {
-    //se utiliza herencia y se declara a nodoAVL como subclase de NodoArbol
-
+public class NodoAVL {
+    
+    private Comparable elem;
+    private NodoAVL izquierdo;
+    private NodoAVL derecho;
     private int altura;
 
 
     //CONSTRUCTOR
-    public NodoAVL(Comparable elem, NodoArbol izquierdo, NodoArbol derecho){
-        super(elem, izquierdo, derecho);
-        this.altura = 0;        
+    
+    public NodoAVL(Comparable elem, NodoAVL izquierdo, NodoAVL derecho){
+        this.elem = elem;
+        this.izquierdo = izquierdo;
+        this.derecho = derecho;
+        this.altura = 0;     
     }
 
 
     //OBSERVADORES
 
+    public Comparable getElem(){
+
+        return this.elem;
+    }
+
+    public NodoAVL getIzquierdo(){
+
+        return this.izquierdo;
+    }
+
+    public NodoAVL getDerecho(){
+
+        return this.derecho;
+    }
+
     public int getAltura(){
         return this.altura;
-    }
-    
+    }    
 
     public void recalcularAltura(){
         
@@ -38,7 +57,7 @@ public class NodoAVL extends NodoArbol {
     }
 
 
-    private int alturaAux(NodoArbol n){
+    private int alturaAux(NodoAVL n){
         int altura = -1;
         int alturaIzq;
         int alturaDer;
@@ -48,5 +67,22 @@ public class NodoAVL extends NodoArbol {
             altura = Math.max(alturaIzq, alturaDer)+1;
         }
         return altura;
+    }
+
+    //MODIFICADORES
+
+    public void setElem(Comparable elemento){
+
+        this.elem = elemento;
+    }
+
+    public void setIzquierdo(NodoAVL nodo){
+
+        this.izquierdo = nodo;
+    }
+
+    public void setDerecho(NodoAVL nodo){
+
+        this.derecho = nodo;
     }
 }

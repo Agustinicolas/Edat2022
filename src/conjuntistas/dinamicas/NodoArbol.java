@@ -7,11 +7,17 @@
 package conjuntistas.dinamicas;
 
 public class NodoArbol {
-    private Comparable elem;
-    private NodoArbol izquierdo;
-    private NodoArbol derecho;
+    protected Comparable elem;
+    protected NodoArbol izquierdo;
+    protected NodoArbol derecho;
 
     //CONSTRUCTOR
+
+    public NodoArbol(){
+        this.elem = null;
+        this.izquierdo = null;
+        this.derecho = null;
+    }
     public NodoArbol(Comparable elem, NodoArbol izquierdo, NodoArbol derecho){
         this.elem = elem;
         this.izquierdo = izquierdo;
