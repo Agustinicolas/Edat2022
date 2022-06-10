@@ -122,15 +122,20 @@ public class ArbolAVL {
 
 
     private int balance(NodoAVL n){
-        int altIzq = -1;
-        int altDer = -1;
+        int altIzq = 0;
+        int altDer = 0;
         int balance = -1;
         
         if(n.getIzquierdo() != null){
-            altIzq = n.getIzquierdo().getAltura();
-            altDer = n.getDerecho().getAltura();
-            balance = altIzq - altDer;
+            altIzq = n.getIzquierdo().getAltura() +1;
+            
+            
         }
+        if(n.getDerecho() != null){
+            altDer = n.getDerecho().getAltura() +1;
+        }
+
+        balance = altIzq - altDer;
 
         return balance;
 
@@ -161,19 +166,91 @@ public class ArbolAVL {
                 if (n.getIzquierdo() != null){
                     exito = insertarAux(n.getIzquierdo(), elemento);
                 }else{
-                    n.setIzquierdo(new NodoAVL(elemento, null, null));
+                    n.setIzquierdo(new NodoAVL(elemento, null, null)); 
+                    n.recalcularAltura();                   
                 }
-            }else{ //el elemento a insertar es mayor que el elemento del nodo, se inserta al subarbol derecho
-                //si el nodo tiene HD baja a la derecha, sino agrega elemento
+            }else{  //el elemento a insertar es mayor que el elemento del nodo, se inserta al subarbol derecho
+                    //si el nodo tiene HD baja a la derecha, sino agrega elemento
                 if(n.getDerecho()!= null){
                     exito = insertarAux(n.getDerecho(), elemento);
                 }else{
                     n.setDerecho(new NodoAVL(elemento, null,null));
+                    n.recalcularAltura();
                 }
             }
-            /////////////////////////////balancear/////////////////
+            n = verificacionBalance(n);     //metodo que comprueba si el subarbol de raiz n esta balanceado
         }
         return exito;
+    }
+
+
+    private NodoAVL verificacionBalance(NodoAVL n){    //metodo que comprueba si el subarbol de raiz n esta balanceado
+        int balance = balance(n);
+        int balancehijo;
+
+        if (balance == 2){  //arbol caido hacia la izquierda
+            balancehijo = balance(n.getIzquierdo());
+                if (balancehijo == 1 || balancehijo == 0){      //subarbol izquierdo caido tambien hacia la izquierda, rotacion simple
+                    n = rotacionSimpleDerecha(n);
+                }else if(balancehijo == -1){                    //subarbol izquierdo caido hacia la derecha, rotacion doble
+                    n = rotacionDobleIzqDer(n);                    
+                }
+        }else if(balance == -2){    //arbol caido hacia la derecha
+            balancehijo = balance(n.getDerecho());
+            if(balancehijo == -1 || balancehijo == 0){          //subarbol derecho caido hacia la derecha, rotacion simple
+                n = rotacionSimpleIzquierda(n);
+            }else if(balancehijo == 1){                         //subarbol derecho caido hacia la izquierda, rotacion doble
+                n = rotacionDobleDerIzq(n);                
+            }
+        }
+
+        return n;
+    }
+
+
+    private NodoAVL rotacionSimpleIzquierda(NodoAVL r){
+        NodoAVL hijoDer = r.getDerecho();
+        NodoAVL temp = hijoDer.getIzquierdo();
+
+        hijoDer.setIzquierdo(r);
+        r.setDerecho(temp);
+
+        r.recalcularAltura();
+        hijoDer.recalcularAltura();
+
+        return hijoDer;
+    }
+
+
+    private NodoAVL rotacionSimpleDerecha(NodoAVL r){
+        NodoAVL hijoIzq = r.getIzquierdo();
+        NodoAVL temp = hijoIzq.getDerecho();
+
+        hijoIzq.setDerecho(r);
+        r.setIzquierdo(temp);
+
+        r.recalcularAltura();
+        hijoIzq.recalcularAltura();
+
+        return hijoIzq;
+    }
+
+
+    private NodoAVL rotacionDobleDerIzq(NodoAVL r){
+        NodoAVL q = r.getDerecho();
+        q = rotacionSimpleDerecha(q);
+        r = rotacionSimpleIzquierda(r);
+
+        return r;
+    }
+
+
+    private NodoAVL rotacionDobleIzqDer(NodoAVL r){
+        NodoAVL q=r.getIzquierdo();
+        q = rotacionSimpleIzquierda(q);
+        r = rotacionSimpleDerecha(r);
+
+        return r;
     }
 
 
@@ -185,6 +262,118 @@ public class ArbolAVL {
         }
         return vacio;
     }
+
+
+    public boolean eliminar(Comparable elemento){
+        boolean exito = false;
+        if (this.raiz != null){
+            exito = eliminarAux(this.raiz, null, elemento);
+        }
+    return exito;
+    }
+
+    private boolean eliminarAux(NodoAVL n,NodoAVL padre, Comparable elem){
+        boolean exito = false;
+        if (n != null){
+            if(elem.compareTo(n.getElem()) ==0 ){   //Si se encuentra el nodo, se procede con la eliminacion
+                int hijos = cantHijos(n);    
+                if (hijos == 0){    //CASO A: n es hoja
+                    casoA(n, padre);
+                }else if(hijos == 1){   //CASO B: n tiene un hijo, izquierdo o derecho
+                    casoB(n, padre);                    
+                }else if(hijos == 2){   //CASO C: el nodo a eliminar tiene dos hijos
+                    casoC(n, padre, elem);
+                }
+                exito = true;
+                padre = verificacionBalance(padre);     //metodo que comprueba si el subarbol de raiz n esta balanceado
+                
+            }else if(elem.compareTo(n.getElem()) < 0){    //Si el elemento buscado es menor que el elemento del nodo, busca en el subarbol izquierdo
+                exito = eliminarAux(n.getIzquierdo(), n, elem);
+            }else if(elem.compareTo(n.getElem()) > 0){  //Si el elemento buscadao es mayor que el elemento del nodo, busca en el subarbol derecho
+                exito = eliminarAux(n.getDerecho(), n, elem);
+            }
+        }
+        return exito;
+    }
+
+
+    private int cantHijos(NodoAVL n){
+        int hijos = 0;
+    
+        if(n.getIzquierdo() != null){
+            hijos++;
+        }
+        if(n.getDerecho() != null){
+            hijos++;
+        }  
+
+        return hijos;
+    }
+
+
+    private void casoA(NodoAVL n, NodoAVL padre){
+        //Metodo auxiliar al eliminar.
+        //Trata el caso en el que el elemento a eliminar es hoja
+        if(this.raiz == n){     //CASO ESPECIAL RAIZ
+            this.raiz = null;
+        }else{
+            if(n.getElem().compareTo(padre.getElem())<0){   //Si el elemento es HI se modifica el enlace al HI del nodo padre
+                padre.setIzquierdo(null);
+            }else{  //Si el elemento es HD se modifica el enlace al HD del nodo padre
+                padre.setDerecho(null);
+            }
+        }
+    }
+
+
+    private void casoB(NodoAVL n, NodoAVL padre){
+        //Metodo auxiliar al eliminar.
+        //Trata el caso en el que el elemento a eliminar tiene un hijo
+        boolean derecho = true;
+        if(n.getDerecho() == null){     //si el nodo tiene HD, derecho es true, caso contrario es false
+            derecho = false;
+        }
+        if(this.raiz == n){     //CASO ESPECIAL RAIZ
+            if(derecho){
+                this.raiz = n.getDerecho();
+            }else{
+                this.raiz = n.getIzquierdo();
+            }
+        }else{
+            if(n.getElem().compareTo(padre.getElem())<0){   //Si el elemento es HI se modifica el enlace al HI del nodo padre
+                if(derecho){
+                    padre.setIzquierdo(n.getDerecho());     //Enlazo HI de padre con HD de nodo
+                }else{
+                    padre.setIzquierdo(n.getIzquierdo());   //Enlazo HI de padre con HI de nodo
+                }
+            }else{  //Si el elemento es HD se modifica el enlace al HD del nodo padre
+                if(derecho){
+                    padre.setDerecho(n.getDerecho());   //Enlazo HD de padre con HD de nodo
+                }else{
+                    padre.setDerecho(n.getIzquierdo()); //Enlazo HI de padre con HI de nodo
+                }
+            }
+        }
+    }
+
+
+    private void casoC(NodoAVL n, NodoAVL padre, Comparable elem){
+        NodoAVL nuevoElem = n.getIzquierdo();
+        NodoAVL hermano = n.getIzquierdo().getDerecho();
+        NodoAVL padreAux = n;
+        while (hermano != null){
+            padreAux = nuevoElem;
+            nuevoElem = hermano;
+            hermano = hermano.getDerecho();
+        }
+        n.setElem(nuevoElem.getElem());
+        if(n.getElem().compareTo(n.getIzquierdo().getElem()) == 0){
+            n.setIzquierdo(n.getIzquierdo().getIzquierdo());
+        }else{
+            eliminarAux(n.getIzquierdo().getDerecho(), n.getIzquierdo(), n.getElem());
+        }
+    }
+
 
     @Override
     public String toString(){
