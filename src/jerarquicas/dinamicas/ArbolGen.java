@@ -569,6 +569,78 @@ public class ArbolGen {
     }
 
 
+    public boolean verificarCamino(Lista lis){
+        Lista lista = lis.clone();
+        boolean correcto = false;
+        if (this.raiz != null){
+            correcto = verificarCaminoAux(this.raiz, lista, true);
+        }
+        return correcto;
+    }
+
+    private boolean verificarCaminoAux(NodoGen n, Lista lis, boolean correcto){
+        Object elem; 
+        if(n==null){
+            if(!lis.esVacia()){
+                correcto = false;
+            }
+        }else{
+            if(!lis.esVacia()){
+                elem = lis.recuperar(1);
+                lis.eliminar(1);
+                correcto = n.getElem().equals(elem);
+                if(correcto){
+                    correcto = verificarCaminoAux(n.getHijoIzquierdo(), lis, correcto);
+                }else{
+                    NodoGen hermano = n.getHermanoDerecho();
+                    NodoGen aux = null;
+                    while(hermano != null && !correcto){
+                        correcto = hermano.getElem().equals(elem);
+                        if(correcto){
+                            aux = hermano;
+                        }
+                        hermano = hermano.getHermanoDerecho();
+                    }
+                    if(correcto){
+                        correcto = verificarCaminoAux(aux.getHijoIzquierdo(), lis, correcto);
+                    }
+                }
+            }
+        }
+        return correcto;
+    }
+
+
+    public Lista listarEntreNiveles(int niv1, int niv2){
+        Lista resultado = new Lista();
+        int nivelActual = 0;
+
+        if(this.raiz != null){
+            if(niv1 == 0){
+                resultado.insertar(this.raiz.getElem(), 1);
+            }
+            listarEntreNivelesAux(niv1, niv2, nivelActual, resultado, this.raiz);
+        }
+        return resultado;
+    }
+
+    private void listarEntreNivelesAux(int niv1, int niv2, int nivelActual, Lista lis, NodoGen n){
+        if(n != null){
+            if( nivelActual < niv1){
+                listarEntreNivelesAux(niv1, niv2, nivelActual+1, lis, n.getHijoIzquierdo());            
+            }if(nivelActual <= niv2){
+                listarEntreNivelesAux(niv1, niv2, nivelActual+1, lis, n.getHijoIzquierdo());
+                lis.insertar(n.getElem(), lis.longitud()+1);
+                NodoGen hermano = n.getHermanoDerecho();
+                while(hermano != null){
+                    listarEntreNivelesAux(niv1, niv2, nivelActual, lis, hermano);
+                    hermano = hermano.getHermanoDerecho();
+                }
+            }
+                
+        }
+    }
+
     
 
 }

@@ -23,7 +23,7 @@ public class TablaHashInt {
         NodoHashInt aux = this.tabla[pos];
         int i = 0;
 
-        while( !encontrado && aux != null && i<3 ){
+        while( !encontrado && aux != null && i<3 ){     ///////FALLA INSERCION. CORREGIR
             encontrado = aux.getElem() == elem;
             aux = aux.getEnlace();
             i++;
