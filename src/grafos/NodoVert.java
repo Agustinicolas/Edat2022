@@ -16,7 +16,7 @@ public class NodoVert {
     }
 
     public Object getSigVertice(){
-        return primerAdy.getVertice();
+        return sigVertice;
     }
 
     public void setSigVert(NodoVert nuevoVert){
