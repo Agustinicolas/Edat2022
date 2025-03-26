@@ -8,6 +8,13 @@ public class NodoAdy {
     private int etiqueta;
 
 
+    public NodoAdy(){
+        this.vertice = null;
+        this.sigAdyacente = null;
+        this.etiqueta = 0;
+    }
+
+
     public NodoVert getVertice(){
         return this.vertice;
     }

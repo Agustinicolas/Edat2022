@@ -7,6 +7,14 @@ public class NodoVert {
     private NodoVert sigVertice;
     private NodoAdy primerAdy;
 
+
+    public NodoVert(){
+        this.elem = null;
+        this.sigVertice = null;
+        this.primerAdy = null;
+    }
+
+
     public Object getElem(){
         return this.elem;
     }
@@ -15,7 +23,7 @@ public class NodoVert {
         this.elem = elemNuevo;
     }
 
-    public Object getSigVertice(){
+    public NodoVert getSigVertice(){
         return sigVertice;
     }
 
