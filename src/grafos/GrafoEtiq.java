@@ -9,6 +9,11 @@ public class GrafoEtiq {
     private NodoVert inicio;
 
 
+    public GrafoEtiq(){
+        this.inicio = null;
+    }
+
+
     private NodoVert ubicarVertice(Object buscado){
         //Recorre la lista de vertices buscando un elemento
         //Si lo encuentra devuelve el enlace al nodo que lo contiene
@@ -68,7 +73,10 @@ public class GrafoEtiq {
     //existeArco(Object, Object): boolean
 
 
-    //vacio():boolean
+    public boolean vacio(){
+        boolean esVacio = this.inicio == null;
+        return esVacio;
+    }
 
 
     //otras operaciones de grafo
