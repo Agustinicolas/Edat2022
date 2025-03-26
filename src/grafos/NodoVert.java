@@ -8,9 +8,9 @@ public class NodoVert {
     private NodoAdy primerAdy;
 
 
-    public NodoVert(){
-        this.elem = null;
-        this.sigVertice = null;
+    public NodoVert(Object nuevoVertice, NodoVert siguiente){
+        this.elem = nuevoVertice;
+        this.sigVertice = siguiente;
         this.primerAdy = null;
     }
 
