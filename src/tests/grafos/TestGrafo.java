@@ -18,7 +18,7 @@ public class TestGrafo {
         System.out.println("\nMetodo listarEnProfundidad(), output esperado: lista vacia. output test ->"+listado.toString());
 
         //INSERCION ELEMENTO GRAFO VACIO
-        System.out.println("\nMetodo insertarVertice(obj), output esperado: true. output test -> "+grafo.insertarVertice("Elemento inicial"));
+        System.out.println("\nMetodo insertarVertice(obj), output esperado: true. output test -> "+grafo.insertarVertice("A"));
 
         //GRAFO NO VACIO, METODO VACIO
         System.out.println("\nMetodo vacio(), output esperado: false. output test  -> " + grafo.vacio());
@@ -27,18 +27,21 @@ public class TestGrafo {
         System.out.println("\nMetodo existeVertice(obj). output esperado: false. output test -> "+grafo.existeVertice("Elemento cualquiera"));
 
         //EXISTE VERTICE, VERTICE CORRECTO
-        System.out.println("\nMetodo existeVertice(obj). output esperado: true. output test -> "+grafo.existeVertice("Elemento inicial"));
+        System.out.println("\nMetodo existeVertice(obj). output esperado: true. output test -> "+grafo.existeVertice("A"));
 
         //LISTADO EN PROFUNDIDAD GRAFO UNICO ELEMENTO
         listado = grafo.listarEnProfundidad();
-        System.out.println("\nMetodo listarEnProfundidad(), output esperado: 'Elemento inicial'. output test ->"+listado.toString());
+        System.out.println("\nMetodo listarEnProfundidad(), output esperado: 'A'. output test ->"+listado.toString());
 
         //INSERTAR VERTICE EN GRAFO NO VACIO
-        System.out.println("\nMetodo insertarVertice(obj), output esperado: true. output test -> "+grafo.insertarVertice("Elemento siguiente"));
+        System.out.println("\nMetodo insertarVertice(obj), output esperado: true. output test -> "+grafo.insertarVertice("B"));
+        System.out.println("\nMetodo insertarVertice(obj), output esperado: true. output test -> "+grafo.insertarVertice("C"));
+        System.out.println("\nMetodo insertarVertice(obj), output esperado: true. output test -> "+grafo.insertarVertice("D"));
+        
 
         //LISTADO EN PROFUNDIDAD GRAFO UNICO ELEMENTO
         listado = grafo.listarEnProfundidad();
-        System.out.println("\nMetodo listarEnProfundidad(), output esperado: 'Elemento siguietne | Elemento inicial'. output test ->\n"+listado.toString());
+        System.out.println("\nMetodo listarEnProfundidad(), output esperado: 'D | C | B | A'. output test ->\n"+listado.toString());
     }
 
 }

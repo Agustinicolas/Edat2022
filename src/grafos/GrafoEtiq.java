@@ -64,13 +64,55 @@ public class GrafoEtiq {
     }
 
 
-    //insertarArco(Object, Object): boolean
+    public boolean insertarArco(Object origen, Object destino, int etiqueta){
+        boolean exito = false;
+        //VERIFICAR que el arco no exista previo a insertar
+        //verifica existencia de vertices
+        NodoVert nodoOrigen = ubicarVertice(origen);
+        NodoVert nodoDestino = ubicarVertice(destino);
+        //si ambos vertices existen, se procede
+        if(nodoOrigen !=null && nodoDestino != null){
+            //verifico que el arco no exista
+            boolean existeArco = existeArco(origen, destino);
+            if(!existeArco){
+                NodoAdy aux = nodoOrigen.getPrimerAdy();
+                if(aux == null){
+                    //si el nodo no tiene arcos, agrega primer arco
+                    nodoOrigen.setPrimerAdy(new NodoAdy(nodoDestino, etiqueta));
+                }else{
+                    //si el nodo tiene arcos, recorre la lista hasta el final y agrega el nuevo arco
+                    while(aux.getSigAdyacente() != null){
+                        aux = aux.getSigAdyacente();
+                    }
+                    aux.setSigAdyacente(new NodoAdy(nodoDestino, etiqueta));
+                }
+                exito = true;                
+            }
+
+        }
+
+        return exito;
+    }
 
 
     //eliminarArco(Object, Object): boolean
 
 
     //existeArco(Object, Object): boolean
+    public boolean existeArco(Object origen, Object buscado){
+        boolean existe = false;
+        NodoVert nodoOrigen = ubicarVertice(origen);
+        if(nodoOrigen != null){
+            NodoAdy aux = nodoOrigen.getPrimerAdy();
+            while(aux!= null && existe == false){
+                existe = aux.getVertice().equals(buscado);
+                if(!existe){
+                    aux = aux.getSigAdyacente();
+                }
+            }
+        }
+        return existe;
+    }
 
 
     public boolean vacio(){
